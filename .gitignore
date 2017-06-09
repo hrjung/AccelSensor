@@ -1,0 +1,8 @@
+# ignore .d extension
+*.d
+
+# ignore all files at /Debug directory
+Debug/
+src/
+.config/
+.launches/
