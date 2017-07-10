@@ -74,7 +74,7 @@ extern "C"
 #endif
 
 #define FW_VER_MAJ				2
-#define	FW_VER_MIN				81
+#define	FW_VER_MIN				90
 
 //#define ENABLE_STANDBY
 //#define BLE_ADV_EVENT_PROC

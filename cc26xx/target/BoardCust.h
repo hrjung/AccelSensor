@@ -56,7 +56,7 @@ extern "C" {
 #define     Board_AES0              Board_AES
 #define     Board_WATCHDOG0         Board_WATCHDOG
 
-#define 	Board_ACC_CSN			Board_SPI0_CSN
+#define 	Board_ACC_CSN			Board_GPIO_CSN
 #define		Board_ACC_INT1			Board_GPIO_10
 #define 	Board_ACC_PWR			Board_GPIO_11
 #define		Board_ACC_TEST			Board_GPIO_6

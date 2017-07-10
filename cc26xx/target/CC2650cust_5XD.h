@@ -74,8 +74,8 @@ extern const PIN_Config BoardGpioInitTable[];
  *      <board signal alias>                <pin mapping>
  */
 /* Leds */
-#define Board_LED_ON                        1 /* LEDs on CC2650 are active high */
-#define Board_LED_OFF                       0
+#define Board_LED_ON                        0 /* LEDs on CC2650 are active high */
+#define Board_LED_OFF                       1
 #define Board_DK_LED1                       PIN_UNASSIGNED
 #define Board_DK_LED2                       PIN_UNASSIGNED
 #define Board_DK_LED3                       PIN_UNASSIGNED          /* P1.2  */
@@ -91,11 +91,12 @@ extern const PIN_Config BoardGpioInitTable[];
 #define Board_SPI0_MISO                     IOID_7         /* P1.20 */
 #define Board_SPI0_MOSI                     IOID_8         /* P1.18 */
 #define Board_SPI0_CLK                      IOID_3         /* P1.16 */
-#define Board_SPI0_CSN                      IOID_4
+#define Board_SPI0_CSN                      PIN_UNASSIGNED
 /* Power Board */
-#define Board_3V3_EN                        IOID_14         /* P1.15 */
+//#define Board_3V3_EN                        IOID_14         /* P1.15 */
 
 //hrjung add for sensor board
+#define Board_GPIO_CSN						IOID_4
 #define Board_GPIO_5						IOID_5      // can be test bit
 #define Board_GPIO_6						IOID_6		// test bit
 #define	Board_GPIO_9						IOID_9		// INT2

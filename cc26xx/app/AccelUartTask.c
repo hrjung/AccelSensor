@@ -144,7 +144,7 @@ dbg_cmd_tble_st dbgCmdTable[] = {
 		{ DBG_CMD_DATA_RATE, 1, INT_TYPE, 0, 0, "DRATE", " DRATE [0 ~ 9] : set sensor data rate to be 0 ~ 5.3kbps" },
 		{ DBG_CMD_SET_SCALE, 1, INT_TYPE, 0, 0, "SCALE", " SCALE [0 ~ 3] : set sensor scale option to be 2g, 4g, 8g, 16g scale" },
 //		{ DBG_CMD_SET_DISP_ON, 1, INT_TYPE, 0, 0, "DISP", " DISP [0 ~ 2] display sensor value 0:off, 1:sensor log, 2:average, deviation " },
-		{ DBG_CMD_SET_PERIOD, 1, INT_TYPE, 0, 0, "PERIOD", " PERIOD [100 ~ 5000] set sensor period 100ms ~ 5000ms " },
+		{ DBG_CMD_SET_PERIOD, 1, INT_TYPE, 0, 0, "PERIOD", " PERIOD [100 ~ 5000] set sensor period 2s ~ 3600sec " },
 //		{ DBG_CMD_SMAPLE_CNT, 1, INT_TYPE, 0, 0, "SMPL", " SMPL [10 ~ 150] : set sensong data at a time 10 ~ 150 samples " },
 		{ DBG_CMD_READ_REG, 1, INT_TYPE, 0, 0, "RREG", " RREG [0 ~ 1] : read sensor register value 0: ctrl1, 1:ctrl4 " },
 		{ DBG_CMD_READ_VAL, 0, NONE_TYPE, 0, 0, "RVAL", " RVAL : read sensor data X, Y, Z " },
@@ -355,18 +355,18 @@ static void AccelDbg_setSensingPeriod(dbg_cmd_tble_st Cmd)
 	if(Cmd.cnt == 0)
 	{
 		period = AccelSensor_getSensingPeriod();
-		Display_print1(dispHandle, 3, 0, " Show Sensing Period: %d", (int)period);
+		Display_print1(dispHandle, 3, 0, " Show Sensing Period: %d sec", (int)period);
 	}
 	else
 	{
 		value = Cmd.arg_val;
-		if(value >= 100 && value <= 5000) // range of period
+		if(value >= 2 && value <= 3600) // valid range, unit is sec
 		{
 			period = AccelSensor_setSensingPeriod(value);
 			Display_print1(dispHandle, 3, 0, " set Sensing Period: %d", period);
 		}
 		else
-			Display_print1(dispHandle, 3, 0, " Period should be 100 <= period <= 5000: but %d", value);
+			Display_print1(dispHandle, 3, 0, " Period should be 2 <= period <= 3600 sec: but %d", value);
 	}
 }
 

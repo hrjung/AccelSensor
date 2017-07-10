@@ -102,7 +102,7 @@ static board_led_status_t ledStatus[MAX_LEDS];
 static PIN_Config ledPinTable[] =
 {
 #if defined(CC2650CUST_5XD)
-	Board_LED1 | PIN_GPIO_OUTPUT_EN | PIN_GPIO_HIGH | PIN_PUSHPULL | PIN_DRVSTR_MED, /* LED4 initially off */
+	Board_LED1 | PIN_GPIO_OUTPUT_EN | PIN_GPIO_HIGH | PIN_PUSHPULL | PIN_DRVSTR_MAX, /* LED4 initially off */
 #endif
     PIN_TERMINATE /* Terminate list     */
 };

@@ -88,6 +88,8 @@ extern "C" {
 extern void Board_initGenericGpio(void);
 
 extern int Board_readMotorExtPowerState(void);
+
+extern void test_ACC_output(uint8_t value);
 /*********************************************************************
 *********************************************************************/  
 

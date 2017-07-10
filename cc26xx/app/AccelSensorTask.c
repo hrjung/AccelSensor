@@ -389,6 +389,7 @@ static float real_in[FFT_SAMPLE_MAX], img_in[FFT_SAMPLE_MAX];
 
 
 static uint32_t base_time = 1483972450; // 2017-01-09 14:34:10
+extern uint_t PIN_NumPins;//hrjung test
 /*********************************************************************
  * LOCAL FUNCTIONS
  */
@@ -489,12 +490,12 @@ static accelCBs_t AccelSensor_accelCBs =
 #ifdef USE_ACCEL_DEBUG_TASK
 int AccelSensor_getSensingPeriod(void)
 {
-	return sensing_period;
+	return sensing_period/1000;
 }
 
 int AccelSensor_setSensingPeriod(int period)
 {
-	sensing_period = period;
+	sensing_period = period*1000;
 	Util_rescheduleClock(&accelReadClock, sensing_period);
 
 	return sensing_period;
@@ -701,6 +702,8 @@ static void AccelSensor_init(void)
   Display_print0(dispHandle, 0, 0, "AccelSensor Task");
 #endif // FEATURE_OAD
 
+  //hrjung for power test
+  Board_Led_control(board_led_type_LED1, board_led_state_ON);
 
   Seconds_set(base_time);
 
@@ -718,7 +721,7 @@ static void AccelSensor_init(void)
 
   if(Acc_init() == 0) //open sensor
   {
-	  Display_print0(dispHandle, 3, 0, "Acc open error ");
+	  Display_print1(dispHandle, 3, 0, "Acc open error, NUimPin=%d ", PIN_NumPins);
 	  AccelSensor_error();
   }
 
@@ -2238,7 +2241,7 @@ static void AccelSensor_compensateZeroG(void)
 
 void AccelSensor_error(void)
 {
-	while(1) Board_Led_control(board_led_type_LED1, board_led_state_BLINKING);
+	while(1) Board_Led_control(board_led_type_LED1, board_led_state_ON);
 }
 
 /*********************************************************************
