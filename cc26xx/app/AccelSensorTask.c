@@ -703,7 +703,7 @@ static void AccelSensor_init(void)
 #endif // FEATURE_OAD
 
   //hrjung for power test
-  Board_Led_control(board_led_type_LED1, board_led_state_ON);
+  //Board_Led_control(board_led_type_LED1, board_led_state_ON);
 
   Seconds_set(base_time);
 
@@ -1574,7 +1574,7 @@ static void AccelSensor_start(void)
 {
 	Util_startClock(&accelReadClock);
 #ifndef ENABLE_STANDBY
-	Board_Led_control(board_led_type_LED1, board_led_state_ON);
+	//Board_Led_control(board_led_type_LED1, board_led_state_ON);
 #endif
 	AccelSensor_setSensorInterrupt(1);
 }
@@ -1583,7 +1583,7 @@ static void AccelSensor_stop(void)
 {
 	Util_stopClock(&accelReadClock);
 #ifndef ENABLE_STANDBY
-	Board_Led_control(board_led_type_LED1, board_led_state_OFF);
+	//Board_Led_control(board_led_type_LED1, board_led_state_OFF);
 #endif
 	AccelSensor_setSensorInterrupt(0);
 }
@@ -2241,7 +2241,7 @@ static void AccelSensor_compensateZeroG(void)
 
 void AccelSensor_error(void)
 {
-	while(1) Board_Led_control(board_led_type_LED1, board_led_state_ON);
+	while(1) ; //Board_Led_control(board_led_type_LED1, board_led_state_ON);
 }
 
 /*********************************************************************

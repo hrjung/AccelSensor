@@ -117,6 +117,8 @@ typedef enum {
 	DBG_CMD_SET_INT,
 	DBG_CMD_MOTOR_DETECT,
 
+	DBG_CMD_LED_BLINK,
+
 	DBG_CMD_MAX,
 	DBG_CMD_EMPTY,
 
@@ -158,6 +160,7 @@ dbg_cmd_tble_st dbgCmdTable[] = {
 		{ DBG_CMD_GET_ZERO_G, 0, NONE_TYPE, 0, 0, "ZEROG", " ZEROG : calculate gravity for each axis at steady state " },
 		{ DBG_CMD_SET_INT, 1, INT_TYPE, 0, 0, "INTE", " INTE [0 ~ 1] 0: disable, 1: enable interrupt" },
 		{ DBG_CMD_MOTOR_DETECT, 1, INT_TYPE, 0, 0, "DETM", " DETM [10 ~ 200] threshold value for detecting motor operation" },
+		{ DBG_CMD_LED_BLINK, 1, INT_TYPE, 0, 0, "LED", " LED [0 ~ 1] LED blink test start/end" },
 
 		{ DBG_CMD_MAX, 0, NONE_TYPE, 0, 0, "", "" }
 };
@@ -641,6 +644,35 @@ static void AccelDbg_setThreshold(dbg_cmd_tble_st Cmd)
 			Display_print0(dispHandle, 3, 0, Cmd.usage);
 	}
 }
+
+
+static void AccelDbg_testLedBlink(dbg_cmd_tble_st Cmd)
+{
+	int value;
+	char *blink_str[] = {"end", "start"};
+
+	if(Cmd.cnt == 0)
+	{
+		Display_print1(dispHandle, 3, 0, "LED [0~1]", value);
+	}
+	else
+	{
+		value = Cmd.arg_val;
+		if(value == 0)
+		{
+			Board_Led_control(board_led_type_LED1, board_led_state_OFF);
+			Display_print0(dispHandle, 3, 0, " LED blink start");
+		}
+		else if(value == 1)
+		{
+			Board_Led_control(board_led_type_LED1, board_led_state_BLINKING);
+			Display_print0(dispHandle, 3, 0, " LED blink end");
+		}
+		else
+			Display_print0(dispHandle, 3, 0, Cmd.usage);
+	}
+}
+
 #ifdef DETECT_MOTOR_ON
 extern int AccelSensor_isMotorWorking(void);
 extern void AccelSensor_setSensorMode(int mode);
@@ -847,6 +879,10 @@ static void AccelDbg_processCommand(dbg_cmd_tble_st Cmd)
 		break;
 	case DBG_CMD_MOTOR_DETECT :
 		AccelDbg_setThreshold(Cmd);
+		break;
+
+	case DBG_CMD_LED_BLINK :
+		AccelDbg_testLedBlink(Cmd);
 		break;
 
 	case DBG_CMD_EMPTY : // in case of press return key -> just show
